@@ -32,6 +32,11 @@ class Response
         64 => 'Unknown server error'
     ];
 
+    /**
+     * Unknown error message.
+     *
+     * @var string
+     */
     const UNKNOWN_ERROR_MESSAGE = 'An unknown error occurred';
 
     /**
@@ -83,17 +88,15 @@ class Response
                static::UNKNOWN_ERROR_MESSAGE;
     }
 
+    /**
+     * Message for response code.
+     *
+     * @return string|null
+     */
     protected function responseCodeMessage()
     {
         if (array_key_exists($this->data('responseCode'), static::RESPONSE_CODES_MESSAGES)) {
             return static::RESPONSE_CODES_MESSAGES[$this->data('responseCode')];
-        }
-    }
-
-    public function data($property)
-    {
-        if (array_key_exists($property, $this->data)) {
-            return $this->data[$property];
         }
     }
 
@@ -105,5 +108,17 @@ class Response
     public function payload()
     {
         return $this->data('payload');
+    }
+
+    /**
+     * Get response data by key.
+     *
+     * @return string|null
+     */
+    protected function data($key)
+    {
+        if (array_key_exists($key, $this->data)) {
+            return $this->data[$key];
+        }
     }
 }

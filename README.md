@@ -11,16 +11,16 @@ Create a Kumulos object and then simply call the method on the object itself.
 
 $api = new TiMacDonald\Kumulos\Api($key, $secret);
 
-$response = $api->createUser([
+$api->createUser([
     'name' => 'Tim MacDonald',
     'twitter' => '@timacdonald87',
     'github' => 'timacdonald'
 ]);
 
-if ($response->failed()) {
+if ($api->failed()) {
     // deal with failure
 }
 
-$userId = $response->payload();
+$userId = $api->response()->payload();
 
 ```

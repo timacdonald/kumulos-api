@@ -2,6 +2,8 @@
 
 namespace TiMacDonald\Kumulos;
 
+use Exception;
+
 class Api
 {
     /**
@@ -13,6 +15,16 @@ class Api
      * @var string
      */
     protected $secret;
+
+    /**
+     * @var TiMacDonald\Kumulos\Request
+     */
+    protected $request;
+
+    /**
+     * @var TiMacDonald\Kumulos\Response
+     */
+    protected $response;
 
     /**
      * Create a new instance.
@@ -36,8 +48,42 @@ class Api
      */
     public function __call($method, $arguments)
     {
-        $request = new Request($method, $arguments[0], $this->apiKey, $this->secret);
+        $this->request = new Request($method, $arguments[0], $this->apiKey, $this->secret);
 
-        return $request->send();
+        return $this->response = $this->request->send();
+    }
+
+    /**
+    * Get request.
+    *
+     * @return TiMacDonald\Kumulos\Request
+     */
+    public function request()
+    {
+        return $this->request;
+    }
+
+    /**
+     * Ger response.
+     *
+     * @return TiMacDonald\Kumulos\Response
+     */
+    public function response()
+    {
+        return $this->response;
+    }
+
+    /**
+     * Indicates a failure response.
+     *
+     * @return bool
+     */
+    public function failed()
+    {
+        if (is_null($this->response)) {
+            throw new Exception('You must send the API request before you can determine if it failed');
+        }
+
+        return $this->response->failed();
     }
 }
