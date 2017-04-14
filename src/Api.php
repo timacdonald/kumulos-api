@@ -4,7 +4,7 @@ namespace TiMacDonald\Kumulos;
 
 use Exception;
 
-class Kumulos
+class Api
 {
     /**
      * @var string

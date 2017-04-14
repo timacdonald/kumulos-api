@@ -9,13 +9,15 @@ Create a Kumulos object and then simply call the method on the object itself.
 ```php
 <?php
 
+...
+
 use TiMacDonald\Kumulos\Kumulos;
 
 ...
 
-$kumulos = new Kumulos($key, $secret);
+$api = new Api($key, $secret);
 
-$userId = $kumulos->createUser([
+$userId = $api->createUser([
     'name' => 'Tim MacDonald',
     'twitter' => '@timacdonald87',
     'github' => 'timacdonald'
