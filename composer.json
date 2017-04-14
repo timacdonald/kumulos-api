@@ -1,0 +1,20 @@
+{
+    "name": "timacdonald/kumulos",
+    "description": "Simplified class based package for the Kumulos API.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim MacDonald",
+            "email": "tim.mac7@me.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "TiMacDonald\\Kumulos\\": "/src"
+        }
+    },
+    "require": {
+        "php" : ">=5.4"
+    }
+}
