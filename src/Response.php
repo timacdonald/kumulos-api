@@ -32,6 +32,8 @@ class Response
         64 => 'Unknown server error'
     ];
 
+    const UNKNOWN_ERROR_MESSAGE = 'An unknown error occurred';
+
     /**
      * The decoded response data retrieved from the Kumulos API
      *
@@ -46,7 +48,7 @@ class Response
      */
     public function __construct($data)
     {
-        $this->data = json_decode($data) ?: [];
+        $this->data = json_decode($data, true) ?: [];
     }
 
     /**
@@ -62,11 +64,11 @@ class Response
     /**
      * Status code provided by the Kumulos API
      *
-     * @return int
+     * @return int|null
      */
     public function statusCode()
     {
-        return $this->responseCode ?? 0;
+        return $this->data('responseCode');
     }
 
     /**
@@ -76,15 +78,23 @@ class Response
      */
     public function message()
     {
-        if ($this->responseMessage) {
-            return $this->responseMessage;
-        }
+        return $this->data('responseMessage') ??
+               $this->responseCodeMessage() ??
+               static::UNKNOWN_ERROR_MESSAGE;
+    }
 
-        if (array_key_exists($this->responseCode, static::RESPONSE_CODES_MESSAGES)) {
-            return static::RESPONSE_CODES_MESSAGES[$this->responseCode];
+    protected function responseCodeMessage()
+    {
+        if (array_key_exists($this->data('responseCode'), static::RESPONSE_CODES_MESSAGES)) {
+            return static::RESPONSE_CODES_MESSAGES[$this->data('responseCode')];
         }
+    }
 
-        return static::RESPONSE_CODES_MESSAGES[static::ERROR_RESPONSE_CODE];
+    public function data($property)
+    {
+        if (array_key_exists($property, $this->data)) {
+            return $this->data[$property];
+        }
     }
 
     /**
@@ -94,18 +104,6 @@ class Response
      */
     public function payload()
     {
-        return $this->payload;
-    }
-
-    /**
-     * Delegate undeclared property access.
-     *
-     * @return mixed|null
-     */
-    protected function __get($property)
-    {
-        if (array_key_exists($property, $this->attributes)) {
-            return $this->attributes[$property];
-        }
+        return $this->data('payload');
     }
 }

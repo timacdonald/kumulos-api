@@ -61,7 +61,7 @@ class Request
 
         curl_setopt($ch, CURLOPT_POST, 1);
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->parameter));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($this->parameters));
 
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 

@@ -24,7 +24,7 @@ class Api
      */
     public function __construct($apiKey, $secret)
     {
-        $this->key = $apiKey;
+        $this->apiKey = $apiKey;
 
         $this->secret = $secret;
     }
