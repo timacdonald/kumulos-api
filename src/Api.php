@@ -2,8 +2,6 @@
 
 namespace TiMacDonald\Kumulos;
 
-use Exception;
-
 class Api
 {
     /**
@@ -14,7 +12,7 @@ class Api
     /**
      * @var string
      */
-    protected $secretKey;
+    protected $secret;
 
     /**
      * Create a new instance.
@@ -34,20 +32,12 @@ class Api
      *
      * @param  $method  string
      * @param  $arguments  array
-     * @return array
-     *
-     * @throws \Exception
+     * @return TiMacDonald\Kumulos\Response
      */
     public function __call($method, $arguments)
     {
-        $request = new Request($method, $arguments, $this->apiKey, $this->secret);
+        $request = new Request($method, $arguments[0], $this->apiKey, $this->secret);
 
-        $response = $request->send();
-
-        if ($response->failed()) {
-            throw new Exception($response->message(), $response->statusCode());
-        }
-
-        return $response->payload();
+        return $request->send();
     }
 }
