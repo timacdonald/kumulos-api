@@ -57,7 +57,7 @@ $userId = $api->response()->payload();
 
 Kumulos responds with custom status codes, but if you would like to normalize these status codes to the [standard HTTP response codes](http://bit.ly/2ovBMPg), you can simply call the following methods:
 
-```
+```php
 <?php
 
 // Check if it failed
