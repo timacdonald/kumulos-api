@@ -1,7 +1,7 @@
 {
     "name": "timacdonald/kumulos",
-    "description": "Simplified class based package for the Kumulos API.",
-    "type": "project",
+    "description": "Kumulos PHP API PHP",
+    "type": "utility",
     "license": "MIT",
     "authors": [
         {
@@ -15,6 +15,6 @@
         }
     },
     "require": {
-        "php" : ">=7.0.0"
+        "php" : ">=5.6"
     }
 }

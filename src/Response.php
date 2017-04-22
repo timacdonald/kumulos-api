@@ -15,7 +15,8 @@ class Response
           NO_SUCH_FORMAT_RESPONSE_CODE = 8,
           ACCOUNT_SUSPENDED_RESPONSE_CODE = 16,
           INVALID_REQUEST_RESPONSE_CODE = 32,
-          ERROR_RESPONSE_CODE = 64;
+          ERROR_RESPONSE_CODE = 64,
+          NORMALIZED_ERROR_RESPONSE_CODE = 500;
 
     /**
      * Response status codes messages provided by Kumulos API.
@@ -33,11 +34,35 @@ class Response
     ];
 
     /**
-     * Unknown error message.
+     * Normalized version of the Kumulos response codes.
+     * @link http://bit.ly/2ovBMPg
      *
-     * @var string
+     * @var array
      */
-    const UNKNOWN_ERROR_MESSAGE = 'An unknown error occurred';
+    const NORMALIZED_RESPONSE_CODES = [
+        1 => 200,
+        2 => 401,
+        4 => 405,
+        8 => 406,
+        16 => 402,
+        32 => 400,
+        64 => 500
+    ];
+
+    /**
+     * Normalized version of the Kumulos response messages.
+     *
+     * @var array
+     */
+    const NORMALIZED_RESPONSE_CODES_MESSAGES = [
+        200 => 'OK',
+        401 => 'Unauthorized',
+        405 => 'Method Not Allowed',
+        406 => 'Not Acceptable',
+        402 => 'Payment Required',
+        400 => 'Bad Request',
+        500 => 'Internal Server Error'
+    ];
 
     /**
      * The decoded response data retrieved from the Kumulos API
@@ -69,11 +94,25 @@ class Response
     /**
      * Status code provided by the Kumulos API
      *
-     * @return int|null
+     * @return int
      */
     public function statusCode()
     {
-        return $this->data('responseCode');
+        return $this->data('responseCode') ?: static::ERROR_RESPONSE_CODE;
+    }
+
+    /**
+     * Normalized version of the status code provided by the Kumulos API
+     *
+     * @return int
+     */
+    public function normalizedStatusCode()
+    {
+        if (array_key_exists($this->statusCode(), static::NORMALIZED_RESPONSE_CODES)) {
+            return static::NORMALIZED_RESPONSE_CODES[$this->statusCode()];
+        }
+
+        return static::NORMALIZED_RESPONSE_CODES[static::ERROR_RESPONSE_CODE];
     }
 
     /**
@@ -83,21 +122,25 @@ class Response
      */
     public function message()
     {
-        return $this->data('responseMessage') ??
-               $this->responseCodeMessage() ??
-               static::UNKNOWN_ERROR_MESSAGE;
+        if (array_key_exists($this->statusCode(), static::RESPONSE_CODES_MESSAGES)) {
+            return static::RESPONSE_CODES_MESSAGES[$this->statusCode()];
+        }
+
+        return static::RESPONSE_CODES_MESSAGES[static::ERROR_RESPONSE_CODE];
     }
 
     /**
-     * Message for response code.
+     * Normalized version of the message provided by the Kumulos API.
      *
-     * @return string|null
+     * @return string
      */
-    protected function responseCodeMessage()
+    public function normalizedMessage()
     {
-        if (array_key_exists($this->data('responseCode'), static::RESPONSE_CODES_MESSAGES)) {
-            return static::RESPONSE_CODES_MESSAGES[$this->data('responseCode')];
+        if (array_key_exists($this->normalizedStatusCode(), static::NORMALIZED_RESPONSE_CODES_MESSAGES)) {
+            return static::NORMALIZED_RESPONSE_CODES_MESSAGES[$this->normalizedStatusCode()];
         }
+
+        return static::NORMALIZED_RESPONSE_CODES_MESSAGES[static::NORMALIZED_ERROR_RESPONSE_CODE];
     }
 
     /**
@@ -107,7 +150,7 @@ class Response
      */
     public function payload()
     {
-        return $this->data('payload');
+        return $this->data('payload') ?: [];
     }
 
     /**

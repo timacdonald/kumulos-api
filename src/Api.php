@@ -56,7 +56,7 @@ class Api
     /**
     * Get request.
     *
-     * @return TiMacDonald\Kumulos\Request
+     * @return TiMacDonald\Kumulos\Request|null
      */
     public function request()
     {
@@ -66,7 +66,7 @@ class Api
     /**
      * Ger response.
      *
-     * @return TiMacDonald\Kumulos\Response
+     * @return TiMacDonald\Kumulos\Response|null
      */
     public function response()
     {
@@ -77,6 +77,8 @@ class Api
      * Indicates a failure response.
      *
      * @return bool
+     *
+     * @throws Exception
      */
     public function failed()
     {
