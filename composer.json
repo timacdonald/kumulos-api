@@ -1,12 +1,14 @@
 {
     "name": "timacdonald/kumulos",
-    "description": "Kumulos PHP API PHP",
+    "description": "Kumulos PHP API SDK",
+    "keywords": ["kumulos", "PHP", "API", "SDK"],
     "type": "utility",
     "license": "MIT",
     "authors": [
         {
             "name": "Tim MacDonald",
-            "email": "tim.mac7@me.com"
+            "email": "tim.mac7@me.com",
+            "homepage": "https://timacdonald.me"
         }
     ],
     "autoload": {

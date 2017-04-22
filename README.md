@@ -1,4 +1,4 @@
-# Kumulos PHP API Package
+# Kumulos PHP API SDK Package
 
 This package is a modern PHP SDK for the [Kumulos API](https://docs.kumulos.com/build/api/).
 
@@ -19,28 +19,36 @@ Create a Kumulos API object and then simply call the methods you've created in y
 ```php
 <?php
 
-use Exception;
 use TiMacDonald\Kumulos\Api;
 
 ...
 
-// Create our api object instance
+/**
+ * Create our api object instance.
+ */
 $api = new Api($key, $secret);
 
-// Call an API method, passing in an associative array of values
+/**
+ * Call an API method on the object, passing in an associative array of values.
+ */
 $api->createUser([
     'name' => 'Tim MacDonald',
     'twitter' => '@timacdonald87',
-    'github' => 'timacdonald'
+    'github' => 'timacdonald',
+    'website' => 'timacdonald.me'
 ]);
 
-// Check if it failed
+/**
+ * Check if it failed.
+ */
 if ($api->failed()) {
     // deal with failure, perhaps with an exception
     throw new Exception($api->message(), $api->statusCode());
 }
 
-// Retrieve the response payload
+/**
+ * Retrieve the response payload.
+ */
 $userId = $api->response()->payload();
 
 ```
@@ -62,4 +70,4 @@ if ($api->failed()) {
 
 ## License
 
-This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos/blob/master/LICENSE.txt) file for details.
+This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos-api/blob/master/LICENSE.txt) file for details.
