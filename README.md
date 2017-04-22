@@ -70,4 +70,4 @@ if ($api->failed()) {
 
 ## License
 
-This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos-api/blob/master/LICENSE.txt) file for details.
+This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos-api/blob/master/License.txt) file for details.
