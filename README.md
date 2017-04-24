@@ -21,11 +21,7 @@ This package uses *Semantic Versioning*. You can find out more about what this i
 Create a Kumulos API object and then simply call the methods you've created in your API on the API object.
 
 ```php
-<?php
-
 use TiMacDonald\Kumulos\Api;
-
-...
 
 /**
  * Create our api object instance.
@@ -54,7 +50,6 @@ if ($api->failed()) {
  * Retrieve the response payload.
  */
 $userId = $api->response()->payload();
-
 ```
 
 ### Normalized Status Codes
@@ -62,14 +57,11 @@ $userId = $api->response()->payload();
 Kumulos responds with custom status codes, but if you would like to normalize these status codes to the [standard HTTP response codes](http://bit.ly/2ovBMPg), you can simply call the following methods:
 
 ```php
-<?php
-
 // Check if it failed
 if ($api->failed()) {
     // deal with failure, perhaps with an exception
     throw new Exception($api->normalizedMessage(), $api->normalizedStatusCode());
 }
-
 ```
 
 ## Contributing
