@@ -12,6 +12,10 @@ composer require timacdonald/kumulos
 
 Althought it is not recommended, because this package does not contain any dependencies, you can simply download and include the files in your project.
 
+## Versioning
+
+This package uses *Semantic Versioning*. You can find out more about what this is and why it matters by reading [the spec](http://semver.org) or for something more readable, check out [this post](https://laravel-news.com/building-apps-composer).
+
 ## Usage
 
 Create a Kumulos API object and then simply call the methods you've created in your API on the API object.
