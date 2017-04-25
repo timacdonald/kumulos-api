@@ -43,7 +43,7 @@ $api->createUser([
  */
 if ($api->failed()) {
     // deal with failure, perhaps with an exception
-    throw new Exception($api->message(), $api->statusCode());
+    throw new Exception($api->response()->message(), $api->response()->statusCode());
 }
 
 /**
@@ -60,7 +60,7 @@ Kumulos responds with custom status codes, but if you would like to normalize th
 // Check if it failed
 if ($api->failed()) {
     // deal with failure, perhaps with an exception
-    throw new Exception($api->normalizedMessage(), $api->normalizedStatusCode());
+    throw new Exception($api->response()->normalizedMessage(), $api->response()->normalizedStatusCode());
 }
 ```
 
