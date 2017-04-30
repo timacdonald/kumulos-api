@@ -77,7 +77,7 @@ KUMULOS_API_KEY=your-api-key-here
 KUMULOS_API_SECRET=your-secrethere
 ```
 
-The in your ./config/services.php file, you can add the Kumulos service like so:
+The in your `./config/services.php` file, you can add the Kumulos service like so:
 
 ```php
 return [
