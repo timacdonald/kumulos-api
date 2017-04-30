@@ -128,6 +128,11 @@ class UserController extends Controller
 
 Please feel free to suggest new ideas or send through pull requests to make this better. If you'd like to discuss the project, feel free to reach out on [Twitter](https://twitter.com/timacdonald87).
 
+## What Next
+
+- Add ability to force standardised response messages and code.
+- Add Laravel service provider for binding as per docs.
+
 ## License
 
 This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos-api/blob/master/License.txt) file for details.
