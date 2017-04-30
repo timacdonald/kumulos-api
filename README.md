@@ -64,7 +64,7 @@ if ($api->failed()) {
 }
 ```
 
-## Wireing Up DI in Laravel
+## Wiring Up DI in Laravel
 
 If you are utilising the [Laravel](https://laravel.com) framework, you will want to put you API key and secret in you environment (.env) file.
 
