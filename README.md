@@ -64,6 +64,66 @@ if ($api->failed()) {
 }
 ```
 
+## Wireing Up DI in Laravel
+
+If you are utilising the [Laravel](https://laravel.com) framework, you will want to put you API key and secret in you environment (.env) file.
+
+```
+...
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+KUMULOS_API_KEY=your-api-key-here
+KUMULOS_API_SECRET=your-secrethere
+```
+
+The in your ./config/services.php file, you can add the Kumulos service like so:
+
+```
+return [
+    'kumulos' => [
+        'key' => env('KUMULOS_API_KEY'),
+        'secret' => env('KUMULOS_API_SECRET')
+    ],
+    ...
+```
+
+Great. Now the config is sorted, lets bind it to the IOC container. In your app service provider's register method, simply add the following binding method:
+
+```php
+$this->app->bind(\TiMacDonald\Kumulos\Api::class, function ($app) {
+    return new \TiMacDonald\Kumulos\Api(
+        $app['config']->get('services.kumulos.key'),
+        $app['config']->get('services.kumulos.secret')
+    );
+});
+```
+
+Now you can have the container resolve your API class for you without having to 'new' up an instance.
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use TiMacDonald\Kumulos\Api;
+
+class UserController extends Controller
+{
+    public function store(Api $api)
+    {
+        $api->createUser([
+            'name' => 'Tim MacDonald',
+            'twitter' => '@timacdonald87',
+            'github' => 'timacdonald',
+            'website' => 'timacdonald.me'
+        ]);
+
+        //
+    }
+}
+```
+
 ## Contributing
 
 Please feel free to suggest new ideas or send through pull requests to make this better. If you'd like to discuss the project, feel free to reach out on [Twitter](https://twitter.com/timacdonald87).
