@@ -79,7 +79,7 @@ KUMULOS_API_SECRET=your-secrethere
 
 The in your ./config/services.php file, you can add the Kumulos service like so:
 
-```
+```php
 return [
     'kumulos' => [
         'key' => env('KUMULOS_API_KEY'),
@@ -101,7 +101,7 @@ $this->app->bind(\TiMacDonald\Kumulos\Api::class, function ($app) {
 
 Now you can have the container resolve your API class for you without having to 'new' up an instance.
 
-```
+```php
 <?php
 
 namespace App\Http\Controllers;
