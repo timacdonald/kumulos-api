@@ -10,7 +10,7 @@ You can install using [composer](https://getcomposer.org/) from [Packagist](http
 composer require timacdonald/kumulos
 ```
 
-Althought it is not recommended, because this package does not contain any dependencies, you can simply download and include the files in your project.
+Although it is not recommended, because this package does not contain any dependencies, you can simply download and include the files in your project.
 
 ## Versioning
 
@@ -124,15 +124,12 @@ class UserController extends Controller
 }
 ```
 
-## Contributing
-
-Please feel free to suggest new ideas or send through pull requests to make this better. If you'd like to discuss the project, feel free to reach out on [Twitter](https://twitter.com/timacdonald87).
-
 ## What Next
 
 - Add ability to force standardised response messages and code.
 - Add Laravel service provider for binding as per docs.
+- Throw exceptions instead of checking for failure.
 
-## License
+## Thanksware
 
-This package is under the MIT License. See [LICENSE](https://github.com/timacdonald/kumulos-api/blob/master/License.txt) file for details.
+You are free to use this package, but I ask that you reach out to someone (not me) who has previously, or is currently, maintaining or contributing to an open source library you are using in your project and thank them for their work. Consider your entire tech stack: packages, frameworks, languages, databases, operating systems, frontend, backend, etc.
